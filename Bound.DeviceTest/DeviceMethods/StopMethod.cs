@@ -16,20 +16,23 @@ namespace DeviceManager.Device.DeviceMethods
 
         public static async Task<MethodResponse> OnStop(MethodRequest methodRequest, object userContext)
         {
-            Program.IsRunning = false;
-            var filePath = CreateBlobPath(Program.DeviceData);
+            if (Program.DeviceData != null)
+            {
+                Program.IsRunning = false;
+                var filePath = CreateBlobPath(Program.DeviceData);
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-            string trainingData = JsonConvert.SerializeObject(Program.DeviceData.TrainingData);
-            _ = await blobsManager.AppendDataInBlob(filePath, trainingData);
+                string trainingData = JsonConvert.SerializeObject(Program.DeviceData.TrainingData);
+                _ = await blobsManager.AppendDataInBlob(filePath, trainingData);
 
-            Console.WriteLine(stopwatch.ElapsedMilliseconds + " millisekunder tog det att ladda upp datan");
-            Console.WriteLine("Lägnden på listan: " + Program.DeviceData.TrainingData.Count + " rader");
-            Console.WriteLine("Device stopped");
+                Console.WriteLine(stopwatch.ElapsedMilliseconds + " millisekunder tog det att ladda upp datan");
+                Console.WriteLine("Lägnden på listan: " + Program.DeviceData.TrainingData.Count + " rader");
+                Console.WriteLine("Device stopped");
 
-            Program.DeviceData.TrainingData.Clear();
+                Program.DeviceData.TrainingData.Clear();
+            }
 
             return null;
         }
