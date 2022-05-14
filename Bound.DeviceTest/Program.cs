@@ -15,15 +15,14 @@ namespace Device
         public static bool IsRunning = false;
 
         public static DeviceData DeviceData { get; set; }
-        static string ChestLayUp = "HostName=boundiothub.azure-devices.net;DeviceId=ChestLayUp;SharedAccessKey=hRHHqxy+QTKmwQzHgvvmOmAFQbMNcaBKpki1nlmWD28=";
-        static string ShouldersStandingUp = "HostName=boundiothub.azure-devices.net;DeviceId=ShouldersStandingUp;SharedAccessKey=9qzyR0oiikanTFLV5f0iI0UL+lNqkekeI9DO/REhHZw=";
-        static string BackStandingDown = "HostName=boundiothub.azure-devices.net;DeviceId=BackStandingDown;SharedAccessKey=o5z46b5qqsrM3Di+oJ724JCSZLJvX7sF3dcbtAldx9k=";
-        static string ShouldersOverHead = "HostName=boundiothub.azure-devices.net;DeviceId=ShouldersOverHead;SharedAccessKey=/qWjUfO1hqVxW+moQsQqRUH69mXIiaMzOYm7jBemRyw=";
+        static string ChestMachine = "HostName=boundiothub.azure-devices.net;DeviceId=ChestMachine;SharedAccessKey=Rro705GoUrJk4lN/KMynIVctyGSDX83I6x+tKdJACiY=";
+        static string ShoulderMachine = "HostName=boundiothub.azure-devices.net;DeviceId=ShoulderMachine;SharedAccessKey=n9bN2ZfYCNa217ErZeBD7Jg7j5URMVslgLl1OuKGVoo=";
+        static string BackMachine = "HostName=boundiothub.azure-devices.net;DeviceId=BackMachine;SharedAccessKey=82nYznA9sdamc8MXDPTtsDmyRpBk48EJ6rpx4hdCgSE=";
 
         public static void Main(string[] args)
         {
             Console.WriteLine("Device started");
-            DeviceClient Client = DeviceClient.CreateFromConnectionString(ShouldersOverHead, TransportType.Mqtt);
+            DeviceClient Client = DeviceClient.CreateFromConnectionString(ShoulderMachine, TransportType.Mqtt);
 
             Client.SetMethodHandlerAsync("start", StartMethod.OnStart, null).Wait();
             Client.SetMethodHandlerAsync("stop", StopMethod.OnStop, null).Wait();
