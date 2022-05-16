@@ -4,6 +4,7 @@ using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using WorkoutData.Managers;
 
@@ -25,17 +26,17 @@ namespace DeviceManager.Device.DeviceMethods
                 stopwatch.Start();
 
                 string trainingData = JsonConvert.SerializeObject(Program.DeviceData.TrainingData);
-                _ = await blobsManager.AppendDataInBlob(filePath, trainingData);
+                //_ = await blobsManager.AppendDataInBlob(filePath, trainingData);
 
                 Console.WriteLine(stopwatch.ElapsedMilliseconds + " millisekunder tog det att ladda upp datan");
                 Console.WriteLine("Lägnden på listan: " + Program.DeviceData.TrainingData.Count + " rader");
                 Console.WriteLine("Device stopped");
 
-                Program.DeviceData.TrainingData.Clear();
             }
 
             return null;
         }
+
         static string CreateBlobPath(DeviceData deviceData)
         {
             string blobPath = deviceData.ObjectId + "/";
