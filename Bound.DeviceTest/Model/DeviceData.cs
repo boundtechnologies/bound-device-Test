@@ -2,7 +2,7 @@
 
 namespace Bound
 {
-    public class DeviceData
+    public class UserData
     {
         public string MachineName { get; set; }
         public string ObjectId { get; set; }
