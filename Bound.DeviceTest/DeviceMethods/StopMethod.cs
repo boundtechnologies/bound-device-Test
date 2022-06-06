@@ -24,6 +24,7 @@ namespace DeviceManager.Device.DeviceMethods
 
                 Console.WriteLine("Lägnden på listan: " + Program.UserData.TrainingData.Count + " rader");
                 Console.WriteLine("Device stopped");
+                Console.WriteLine("Username: " + Program.UserData.ObjectId);
 
                 string trainingData = JsonConvert.SerializeObject(Program.UserData);
                 await SendTrainingDataToIoTHubAsync(trainingData);
