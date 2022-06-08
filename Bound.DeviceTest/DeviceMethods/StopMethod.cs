@@ -1,12 +1,10 @@
-﻿using Bound;
-using Device;
+﻿using Device;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using WorkoutData.Managers;
 
 namespace DeviceManager.Device.DeviceMethods
 {

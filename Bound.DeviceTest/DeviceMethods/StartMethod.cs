@@ -1,15 +1,11 @@
 ﻿using Bound;
 using Device;
-using DeviceManager.Device.DeviceMethods;
 using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using WorkoutData.Managers;
 
 namespace DeviceManager.Device.NewFolder
 {
