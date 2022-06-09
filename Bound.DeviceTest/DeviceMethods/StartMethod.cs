@@ -14,7 +14,7 @@ namespace DeviceManager.Device.NewFolder
 
         public static async Task<MethodResponse> OnStart(MethodRequest methodRequest, object userContext)
         {
-            if (!Program.DeviceIsInUse)
+            if (!Program.DeviceIsInUse && !Program.IsRunning)
             {
                 Program.DeviceIsInUse = true;
                 Program.IsRunning = true;

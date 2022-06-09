@@ -13,7 +13,7 @@ namespace DeviceManager.Device.DeviceMethods
 
         public static async Task<MethodResponse> OnStop(MethodRequest methodRequest, object userContext)
         {
-            if (Program.UserData != null)
+            if (Program.UserData != null && Program.IsRunning)
             {
                 Program.IsRunning = false;
                 Program.DeviceIsInUse = false;
