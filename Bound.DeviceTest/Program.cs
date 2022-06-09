@@ -16,7 +16,7 @@ namespace Device
     public class Program
     {
         public static bool IsRunning = false;
-
+        public static bool DeviceIsInUse = false;
         public static UserData UserData { get; set; }
         static string ChestMachine = "HostName=boundiothub.azure-devices.net;DeviceId=ChestMachine;SharedAccessKey=Rro705GoUrJk4lN/KMynIVctyGSDX83I6x+tKdJACiY=";
         static string ShoulderMachine = "HostName=boundiothub.azure-devices.net;DeviceId=ShoulderMachine;SharedAccessKey=n9bN2ZfYCNa217ErZeBD7Jg7j5URMVslgLl1OuKGVoo=";

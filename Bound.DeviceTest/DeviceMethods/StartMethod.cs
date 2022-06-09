@@ -14,22 +14,25 @@ namespace DeviceManager.Device.NewFolder
 
         public static async Task<MethodResponse> OnStart(MethodRequest methodRequest, object userContext)
         {
-            Program.IsRunning = true;
-            Program.UserData = JsonConvert.DeserializeObject<UserData>(methodRequest.DataAsJson);
-            Program.UserData.TrainingData = new List<TrainingData>();
-
-            while (Program.IsRunning)
+            if (!Program.DeviceIsInUse)
             {
-                Thread.Sleep(100);
-                var x = new Random().Next(0, 256);
-                var y = new Random().Next(0, 256);
-                var z = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+                Program.DeviceIsInUse = true;
+                Program.IsRunning = true;
+                Program.UserData = JsonConvert.DeserializeObject<UserData>(methodRequest.DataAsJson);
+                Program.UserData.TrainingData = new List<TrainingData>();
 
-                Console.WriteLine($"{x}, {y}, {z}");
+                while (Program.IsRunning)
+                {
+                    Thread.Sleep(100);
+                    var x = new Random().Next(0, 256);
+                    var y = new Random().Next(0, 256);
+                    var z = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
 
-                Program.UserData.TrainingData.Add(new TrainingData() { X = x, Y = y, Z = z });
+                    Console.WriteLine($"{x}, {y}, {z}");
+
+                    Program.UserData.TrainingData.Add(new TrainingData() { X = x, Y = y, Z = z });
+                }
             }
-
             return null;
         }
 

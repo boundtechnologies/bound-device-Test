@@ -16,6 +16,7 @@ namespace DeviceManager.Device.DeviceMethods
             if (Program.UserData != null)
             {
                 Program.IsRunning = false;
+                Program.DeviceIsInUse = false;
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
