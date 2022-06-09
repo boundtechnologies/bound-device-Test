@@ -10,7 +10,6 @@ namespace DeviceManager.Device.DeviceMethods
 {
     public class StopMethod
     {
-
         public static async Task<MethodResponse> OnStop(MethodRequest methodRequest, object userContext)
         {
             if (Program.UserData != null && Program.IsRunning)
@@ -21,13 +20,9 @@ namespace DeviceManager.Device.DeviceMethods
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                Console.WriteLine("Lägnden på listan: " + Program.UserData.TrainingData.Count + " rader");
-                Console.WriteLine("Device stopped");
-                Console.WriteLine("Username: " + Program.UserData.ObjectId);
-
                 string trainingData = JsonConvert.SerializeObject(Program.UserData);
                 await SendTrainingDataToIoTHubAsync(trainingData);
-                Console.WriteLine(stopwatch.ElapsedMilliseconds + " millisekunder tog det att ladda upp datan");
+                LogToConsole(stopwatch);
                 Program.UserData.TrainingData.Clear();
             }
 
@@ -38,10 +33,18 @@ namespace DeviceManager.Device.DeviceMethods
         public static async Task SendTrainingDataToIoTHubAsync(string dataToSend)
         {
             Encoding messageEncoding = Encoding.UTF8;
-
             using Message msg = new(messageEncoding.GetBytes(dataToSend));
-
             await Program.Client.SendEventAsync(msg);
+        }
+
+        static void LogToConsole(Stopwatch stopwatch)
+        {
+            Console.WriteLine("Lägnden på listan: " + Program.UserData.TrainingData.Count + " rader");
+            Console.WriteLine("Device stopped");
+            Console.WriteLine("Username: " + Program.UserData.ObjectId);
+
+            Console.WriteLine(stopwatch.ElapsedMilliseconds + " millisekunder tog det att ladda upp datan");
+
         }
 
     }
